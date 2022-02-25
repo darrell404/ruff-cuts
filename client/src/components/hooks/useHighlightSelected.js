@@ -1,7 +1,6 @@
-import { useState } from 'react'
 
 function useHighlightSelected(params) {
-    const [select, setSelect] = useState(params)
+    const [select, setSelect] = params
 
     const clickEvent = (event) => {
         setSelect(event.target.textContent)

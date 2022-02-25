@@ -1,8 +1,10 @@
 import useHighlightSelected from "./hooks/useHighlightSelected"
+import { AppContext } from './context/Context' 
+import { useContext } from 'react'
 
 function Sidebar() {
-
-    const { select, clickEvent } = useHighlightSelected("Pets")
+    const { showdashboard } = useContext(AppContext)
+    const { select, clickEvent } = useHighlightSelected(showdashboard)
 
     return (
         <div className="col-span-1">

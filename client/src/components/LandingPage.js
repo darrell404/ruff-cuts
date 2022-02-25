@@ -1,9 +1,12 @@
 import dogBannerImage from '../images/dog-banner.jpeg'
 import useHighlightSelected from './hooks/useHighlightSelected'
+import { AppContext } from './context/Context' 
+import { useContext } from 'react'
 
 function LandingPage() {
 
-    const { select, clickEvent } = useHighlightSelected("Login")
+    const { showpage } = useContext(AppContext)
+    const { select, clickEvent } = useHighlightSelected(showpage)
 
     return (
         <div>

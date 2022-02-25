@@ -1,26 +1,48 @@
 const express = require('express')
 const app = express()
 const mariadb = require('mariadb')
+require('dotenv').config();
+
 const pool = mariadb.createPool({
     host: process.env.DB_HOSTNAME,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
     connectionLimit: 5
+
 })
 
-pool.getConnection((err, connection) => {
-    if(err) {
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.log('Database connection lost')
+pool.getConnection()
+    .then(conn => {
+      conn.query("SELECT customer_id, first_name, last_name FROM customers WHERE created_at='2022-02-25'")
+        .then((rows) => {
+          console.log(rows);
+        })
+        .then((res) => {
+          console.log(res);
+          conn.end();
+        })
+        .catch(err => {
+          //handle error
+          console.log(err); 
+          conn.end();
+        })
+        
+    }).catch(err => {
+      console.log("Not Connected")
+})
+
+app.get('/:customerID', async (req,res) => {
+    console.log("Connecting")
+    await pool.query('SELECT * FROM customers WHERE customer_id = ?', req.params.customerID, (err, rows) => {
+        console.log("Running query")
+        if(!err) {
+            console.log(rows)
+            pool.end()
+            res.json(rows)
         }
-        if (err.code === 'ER_CON_COUNT_ERROR') {
-            console.log("Database has too many connections")
-        } 
-        if (err.code === 'ECONNREFUSED') {
-            console.log("Database connection refused")
-        }
-    }
+        else (console.log(err))
+    })
 })
 
 app.listen(5000, () => {
