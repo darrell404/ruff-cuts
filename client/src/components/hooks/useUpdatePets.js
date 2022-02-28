@@ -21,13 +21,7 @@ function useUpdatePets() {
         clearInput()
     }
 
-    const updatePetDataObject = (event) => {
-        const dataKey = event.target.name
-        const dataValue = event.target.value
-        setPetData({...petData, [dataKey]: dataValue})
-    }
-
-    return { updatePetDataObject, clickAddPet, petData, pets }
+    return { clickAddPet, petData, pets }
 }
 
 export default useUpdatePets

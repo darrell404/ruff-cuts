@@ -1,49 +1,24 @@
 const express = require('express')
 const app = express()
-const mariadb = require('mariadb')
+const router = express.Router()
+const cors = require('cors')
+const loginRoute = require('./api/login')
+const registerRoute = require('./api/register')
+const customerRoute = require('./api/customer')
+const jwt = require('jsonwebtoken')
 require('dotenv').config();
+const db = require('./db/db')
 
-const pool = mariadb.createPool({
-    host: process.env.DB_HOSTNAME,
-    user: process.env.DB_USER,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASSWORD,
-    connectionLimit: 5
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors())
+app.use("/api", router)
 
-})
+router.use('/login', loginRoute)
 
-pool.getConnection()
-    .then(conn => {
-      conn.query("SELECT customer_id, first_name, last_name FROM customers WHERE created_at='2022-02-25'")
-        .then((rows) => {
-          console.log(rows);
-        })
-        .then((res) => {
-          console.log(res);
-          conn.end();
-        })
-        .catch(err => {
-          //handle error
-          console.log(err); 
-          conn.end();
-        })
-        
-    }).catch(err => {
-      console.log("Not Connected")
-})
+router.use('/register', registerRoute)
 
-app.get('/:customerID', async (req,res) => {
-    console.log("Connecting")
-    await pool.query('SELECT * FROM customers WHERE customer_id = ?', req.params.customerID, (err, rows) => {
-        console.log("Running query")
-        if(!err) {
-            console.log(rows)
-            pool.end()
-            res.json(rows)
-        }
-        else (console.log(err))
-    })
-})
+router.use('/customer', customerRoute)
 
 app.listen(5000, () => {
     console.log("Server listening on port 5000")
