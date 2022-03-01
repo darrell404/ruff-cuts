@@ -1,15 +1,18 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const pool = require('../server')
 const db = require('../db/db')
 
-router.route('/').get(async (req,res) => {
-    pool.query("SELECT * FROM customer", (err, rows, fields) => {
-        if (err) throw err
-        res.send(rows)
-    })
+router.route('/').get((req, res) => {
+    res.send("This is the customers endpoint!")
 })
 
-db.query("SELECT * FROM customers").then(rows => console.log(rows))
+router.route('/:customerID').get(async (req,res) => {
+    const rows = await db.query('SELECT customer_id, first_name, last_name FROM customers WHERE customer_id=?', req.params.customerID)
+    res.json(rows)
+})
 
-module.exports = router
+router.route(':/customerID/pets').get(async(req,res) => {
+  // const rows = await pool.query("")
+})
+
+module.exports = router;

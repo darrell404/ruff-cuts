@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react'
+import { Navigate, useNavigate } from 'react-router'
 
 function useValidateData(showpage) {
     const [inputFields, setInputFields] = useState({})
     const [disableButton, setDisableButton] = useState(true)
     const [alert, setAlert] = useState('')
+    const [login, setLogin] = useState(false)
+    const navigate = useNavigate()
 
 useEffect(() => {
     const inputFieldObject = document.querySelectorAll("input")
@@ -40,12 +43,25 @@ useEffect(() => {
         setInputFields( {...inputFields, [dataTarget]: dataValue})
     }
 
-    const checkPasswordsMatch = () => {
+    const checkPasswordsMatch = async () => {
         if (inputFields['password'] !== inputFields['confirm-password']) {
             setAlert("Passwords do not match")
             return
         }
-        setAlert('')
+        
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputFields)
+        }
+        const register = await fetch('/api/register', options)
+        const res = await register.json()
+        console.log(res)
+        if (res.message === 'Created') {
+            navigate('/dashboard')
+        }
     }
 
     return {checkPasswordsMatch, changeInputData, disableButton, alert, inputFields}
