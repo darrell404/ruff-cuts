@@ -10,7 +10,11 @@ const login = async (credentials) => {
 
     const loggingIn = await fetch('/api/login', options)
     const loginResponse = await loggingIn.json()
-    console.log(loginResponse)
+    if(loginResponse.message === 'Authenticated') {
+        console.log("Authenticated")
+        window.location.href = '/dashboard'
+    }
+    else console.log("Access denied")    
 }
 
 

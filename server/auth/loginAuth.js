@@ -20,7 +20,7 @@ const loginAuth = async (req, res, next) => {
         bcrypt.compare(password, hashedPassword, (err, hash) => {
             if(!err) {
                 if (hash) {
-                    res.locals.message = "Password confirmed!"
+                    res.locals.message = "Authenticated"
                     const token = jwt.sign(
                         {
                             customer_id, email

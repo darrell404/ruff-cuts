@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import login from './utils/login'
 
 function LandingPage() {
-
     const { showpage } = useContext(AppContext)
     const { select, clickEvent } = useHighlightSelected(showpage)
     const { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields } = useValidateData(showpage)
