@@ -3,6 +3,7 @@ import useHighlightSelected from './hooks/useHighlightSelected'
 import useValidateData from './hooks/useValidateData'
 import { AppContext } from './context/Context' 
 import { useContext } from 'react'
+import login from './utils/login'
 
 function LandingPage() {
 
@@ -17,6 +18,7 @@ function LandingPage() {
 
     const handleLogin = (e) => {
         e.preventDefault()
+        login(inputFields)
     }
    
     return (
