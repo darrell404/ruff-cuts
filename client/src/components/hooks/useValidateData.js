@@ -58,9 +58,12 @@ useEffect(() => {
         }
         const register = await fetch('/api/register', options)
         const res = await register.json()
-        console.log(res)
         if (res.message === 'Created') {
-            navigate('/dashboard')
+            setAlert("Registered successfully")
+            navigate('/')
+        }
+        if(res.message === 'User already exists') {
+            setAlert("User already exists")
         }
     }
 

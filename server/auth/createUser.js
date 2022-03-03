@@ -9,24 +9,31 @@ const lookupUser = async (req, res, next) => {
         }
         throw error
     })
+    
     if (lookup.length !== 0) {
         res.locals.message = "User already exists"
         next()
+        return
     }
     createUser(firstname, lastname, email, password)
     res.locals.message = "Created"
     next()
 }
 
-const createUser = async (firstname, lastname, email, password) => {
-    console.log("Creating user")
+const createUser = (firstname, lastname, email, password) => {
+    const salt = 10;
     try {
-        const createRecord = await db.query("INSERT INTO customers (first_name, last_name, email, password) VALUES (?,?,?,?)", [firstname, lastname, email, password], (err, rows) => {
-            if(!err) {
-                return(rows)
+        bcrypt.hash(password, salt, async (err, hash) => {
+            if (!err) {
+                const createRecord = await db.query("INSERT INTO customers (first_name, last_name, email, password) VALUES (?,?,?,?)", [firstname, lastname, email, hash], (err, rows) => {
+                    if(!err) {
+                        return(rows)
+                    }
+                    throw error
+                })
             }
-            throw error
-        })
+            console.log(err)
+         })   
     }
     catch(err) {
         console.log(err)

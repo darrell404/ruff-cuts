@@ -10,9 +10,13 @@ function LandingPage() {
     const { select, clickEvent } = useHighlightSelected(showpage)
     const { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields } = useValidateData(showpage)
 
-    const submit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         checkPasswordsMatch(inputFields)
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault()
     }
    
     return (
@@ -30,17 +34,17 @@ function LandingPage() {
                         </button>
                     </div>
                     {select === "Login" ? 
-                    <form className='flex flex-col mx-auto mt-8 w-1/2'>
-                        <input className='border rounded-t border-slate-400 p-2' onChange={changeInputData} type="text" name="email" placeholder='Username' autoComplete='email'></input>
+                    <form className='flex flex-col mx-auto mt-8 w-1/2' onSubmit={handleLogin}>
+                        <input className='border rounded-t border-slate-400 p-2' onChange={changeInputData} type="text" name="email" placeholder='Username' autoComplete="email"></input>
                         <input className='border rounded-b border-slate-400 p-2' onChange={changeInputData} type="password" name="password" placeholder='Password' autoComplete='current-password'></input>
                         <button className="mt-4 mx-auto py-2 px-4 bg-red-400 disabled:bg-red-200 w-1/2 rounded font-bold" disabled={disableButton}>Submit</button>
                     </form> :
-                    <form className='flex flex-col mx-auto mt-8 w-1/2' onSubmit={submit} >
-                        <input className='border rounded-t border-slate-400 p-2' onChange={changeInputData} type="text" name="firstname" placeholder='First Name' autoComplete='given-name'></input>
-                        <input className='border border-slate-400 p-2' onChange={changeInputData} type="text" name="lastname" placeholder='Last Name' autoComplete='family-name'></input>
-                        <input className='border border-slate-400 p-2' onChange={changeInputData} type="text" name="email" placeholder='Email' autoComplete='email'></input>
-                        <input className='border border-slate-400 p-2 password' onChange={changeInputData} type="password" name="password" placeholder='Password' autoComplete='new-password'></input>
-                        <input className='border rounded-b border-slate-400 p-2 password' name="confirm-password" onChange={changeInputData} type="password" placeholder='Verify Password' autoComplete='new-password'></input>
+                    <form className='flex flex-col mx-auto mt-8 w-1/2' onSubmit={handleSubmit} >
+                        <input className='border rounded-t border-slate-400 p-2' onChange={changeInputData} type="text" name="firstname" placeholder='First Name' ></input>
+                        <input className='border border-slate-400 p-2' onChange={changeInputData} type="text" name="lastname" placeholder='Last Name' ></input>
+                        <input className='border border-slate-400 p-2' onChange={changeInputData} type="text" name="email" placeholder='Email' autoComplete="email"></input>
+                        <input className='border border-slate-400 p-2 password' onChange={changeInputData} type="password" name="password" placeholder='Password' autoComplete="new-password"></input>
+                        <input className='border rounded-b border-slate-400 p-2 password' name="confirm-password" onChange={changeInputData} type="password" placeholder='Verify Password' autoComplete="new-password"></input>
                         <button type='submit' className="mt-4 mx-auto py-2 px-4 bg-red-400 disabled:bg-red-200 w-1/2 rounded font-bold" disabled={disableButton}>Submit</button>
                         {alert !== '' && 
                         <div className='pt-4 text-center text-red-600'>
