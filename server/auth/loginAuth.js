@@ -3,6 +3,8 @@ const db = require('../db/db')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
+const cookieExpiry = 60 * 1000 // 1 minute 
+
 const loginAuth = async (req, res, next) => {
     const {email, password} = req.body;
     const checkAccount = await db.query("SELECT customer_id, email, password FROM customers WHERE email = ?", [email], (err, result) => {
@@ -22,11 +24,12 @@ const loginAuth = async (req, res, next) => {
                     const token = jwt.sign(
                         {
                             customer_id, email
-                        }, process.env.TOKEN_KEY,
+                        }, process.env.TOKEN_SECRET,
                         {
-                            expiresIn: "24h"
+                            expiresIn: "10s"
                         }
                     )
+                    res.cookie("token", token, { httpOnly: true, maxAge: cookieExpiry })
                     next()
                     return
                 } 
