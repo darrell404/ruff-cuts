@@ -18,7 +18,6 @@ const useCheckAuth = () => {
         }
         setPageLoad(false)
     }
-
     checkLoggedInStatus()
     }, [])
 

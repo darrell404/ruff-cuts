@@ -1,5 +1,6 @@
-const { useEffect, useContext } = require("react")
-const { AppContext } = require("../context/Context")
+import { useEffect, useContext } from 'react'
+import  { AppContext } from '../context/Context'
+import useValidateData from './useValidateData'
 
 
 const useFetchPets = () => {
@@ -21,7 +22,28 @@ const useFetchPets = () => {
         fetchPets()
     }, [])
 
-    return pets
+    const addPets = async (petdata) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(petdata)
+        }
+        try {
+            const sendPetData = await fetch('/api/pets/addpets', options)
+            const response = sendPetData.json()
+        }
+        catch(e) {console.log(e)}
+        
+    }
+
+    const clearInput = () => {
+        const inputField = document.querySelectorAll('input')
+        inputField.forEach(input => input.value = '')
+    }
+
+    return { pets, addPets }
 }
 
 export default useFetchPets

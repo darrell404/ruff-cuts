@@ -10,9 +10,22 @@ router.route('/').get((req, res) => {
 
 router.route('/userpets').get(isAuthorised, async (req,res) => {
     const { customer_id } = res.locals.jwt
-    console.log(customer_id)
     const pets = await db.query('SELECT pets.pet_name FROM pets WHERE owner_id=?', customer_id)
     res.json(pets)
+})
+
+router.post('/addpets', isAuthorised, async(req, res) => {
+    const { customer_id } = res.locals.jwt
+    const { name, breed, age } = req.body
+    try {
+        const addPet = await db.query('INSERT INTO pets (pet_name, owner_id, pet_breed, pet_age) VALUES (?,?,?,?)', [name, customer_id, breed, age])
+        res.json({"message": "Data added successfully"})
+    }
+    catch(e) {
+        console.log(e)
+        res.json({"message": "Error in adding pet"})
+    }
+
 })
 
 module.exports = router;

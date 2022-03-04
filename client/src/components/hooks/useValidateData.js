@@ -5,7 +5,6 @@ function useValidateData(showpage) {
     const [inputFields, setInputFields] = useState({})
     const [disableButton, setDisableButton] = useState(true)
     const [alert, setAlert] = useState('')
-    const [login, setLogin] = useState(false)
     const navigate = useNavigate()
 
 useEffect(() => {
