@@ -20,7 +20,6 @@ function App() {
           <Routes>
             <Route exact path="/" element={loggedIn ? <Navigate to="/dashboard"/> : <LandingPage />} />
             <Route exact path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
-            <Route exact path="/private" element={<PrivateRoute />} />
           </Routes>
       </div>
   );

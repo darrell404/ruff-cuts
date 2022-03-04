@@ -10,7 +10,6 @@ router.route('/').get((req,res) => {
         res.send(verifyToken)
     }
     res.send({"message": "Not logged in"})
-    
 })
 
 module.exports = router;

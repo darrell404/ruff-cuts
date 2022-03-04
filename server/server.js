@@ -6,6 +6,7 @@ const loginRoute = require('./api/login')
 const registerRoute = require('./api/register')
 const customerRoute = require('./api/customer')
 const loggedinRoute = require('./api/loggedin')
+const petsRoute = require('./api/pets')
 const jwt = require('jsonwebtoken')
 const cookieparser = require("cookie-parser")
 require('dotenv').config();
@@ -24,6 +25,8 @@ router.use('/register', registerRoute)
 router.use('/customer', customerRoute)
 
 router.use('/loggedin', loggedinRoute)
+
+router.use('/pets', petsRoute)
 
 app.listen(5000, () => {
     console.log("Server listening on port 5000")

@@ -24,15 +24,13 @@ const loginAuth = async (req, res, next) => {
                     const token = jwt.sign(
                         {
                             customer_id, email
-                        }, process.env.TOKEN_SECRET,
+                        }, process.env.TOKEN_SECRET
                     )
                     res.cookie("token", token, { httpOnly: true, maxAge: cookieExpiry })
                     next()
-                    return
                 } 
                 res.locals.message = "Username or password incorrect" 
                 next()
-                return
             }
             console.log(err)
         })
@@ -40,7 +38,6 @@ const loginAuth = async (req, res, next) => {
     else {
         res.locals.message = "Username or password incorrect"
         next()
-        return
     }
 }
 
