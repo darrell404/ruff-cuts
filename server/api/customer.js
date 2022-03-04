@@ -11,8 +11,10 @@ router.route('/:customerID').get(async (req,res) => {
     res.json(rows)
 })
 
-router.route(':/customerID/pets').get(async(req,res) => {
-  // const rows = await pool.query("")
+router.route('/:customerID/pets').get(async (req,res) => {
+    console.log(req.params.customerID)
+    const pets = await db.query('SELECT pets.pet_name FROM pets WHERE owner_id=?', req.params.customerID)
+    res.json(pets)
 })
 
 module.exports = router;

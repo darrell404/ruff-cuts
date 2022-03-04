@@ -17,6 +17,4 @@ const login = async (credentials) => {
     else console.log("Access denied")    
 }
 
-
-
 export default login

@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Navigate, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 
 function useValidateData(showpage) {
     const [inputFields, setInputFields] = useState({})
