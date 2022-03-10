@@ -22,7 +22,7 @@ function MainDashboard() {
 
     if (dashboard === "Pets") {
         return ( 
-            <div className="dashboard col-span-4 p-8">
+            <div className="dashboard col-span-4 p-8"> {console.log(services)}
                 <h2 className="font-bold pb-4">Add your pets</h2>
                 <form className="form-container flex flex-col space-y-4" onSubmit={handleSubmit}>
                     <input onChange={changeInputData} name="name" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>
