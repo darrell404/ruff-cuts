@@ -66,7 +66,7 @@ useEffect(() => {
         }
     }
 
-    return {checkPasswordsMatch, changeInputData, disableButton, alert, inputFields}
+    return { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields }
 }
 
 export default useValidateData

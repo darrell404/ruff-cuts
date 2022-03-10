@@ -22,6 +22,13 @@ const useFetchPets = () => {
         fetchPets()
     }, [])
 
+    const clearInputFields = () => {
+        const selectInputs = document.querySelectorAll("input")
+        selectInputs.forEach(element => {
+            element.value = ''
+        })
+    }
+
     const addPets = async (petdata) => {
         const options = {
             method: 'POST',
@@ -33,6 +40,8 @@ const useFetchPets = () => {
         try {
             const sendPetData = await fetch('/api/pets/addpets', options)
             const response = sendPetData.json()
+            setPets([...pets, petdata.name])
+            clearInputFields()
         }
         catch(e) {console.log(e)}
         
