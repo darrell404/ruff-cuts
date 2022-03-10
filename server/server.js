@@ -6,6 +6,7 @@ const loginRoute = require('./api/login')
 const registerRoute = require('./api/register')
 const customerRoute = require('./api/customer')
 const loggedinRoute = require('./api/loggedin')
+const servicesRoute = require('./api/services')
 const petsRoute = require('./api/pets')
 const jwt = require('jsonwebtoken')
 const cookieparser = require("cookie-parser")
@@ -21,6 +22,8 @@ app.use("/api", router)
 router.use('/login', loginRoute)
 
 router.use('/register', registerRoute)
+
+router.use('/services', servicesRoute)
 
 router.use('/customer', customerRoute)
 

@@ -3,6 +3,7 @@ import { AppContext } from './context/Context'
 import useValidateData from './hooks/useValidateData'
 import useFetchPets from './hooks/useFetchPets'
 import useSetTime from './hooks/useSetTime'
+import useGetServices from './hooks/useGetServices'
 import PetInfo from './PetInfo'
 
 function MainDashboard() {
@@ -11,6 +12,7 @@ function MainDashboard() {
     const [ dashboard ] = showdashboard;
     const { changeInputData, disableButton, inputFields } = useValidateData(dashboard)
     const { pets, addPets } = useFetchPets()
+    const services = useGetServices()
     const times = useSetTime(25, 1100, 1300)
 
     const handleSubmit = (event) => {
