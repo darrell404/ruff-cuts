@@ -12,7 +12,7 @@ function MainDashboard() {
     const [ dashboard ] = showdashboard;
     const { changeInputData, disableButton, inputFields } = useValidateData(dashboard)
     const { pets, addPets } = useFetchPets()
-    const services = useGetServices()
+    const { services, servicesName } = useGetServices()
     const times = useSetTime(25, 1100, 1300)
 
     const handleSubmit = (event) => {
@@ -22,7 +22,7 @@ function MainDashboard() {
 
     if (dashboard === "Pets") {
         return ( 
-            <div className="dashboard col-span-4 p-8"> {console.log(services)}
+            <div className="dashboard col-span-4 p-8"> {console.log(servicesName)}
                 <h2 className="font-bold pb-4">Add your pets</h2>
                 <form className="form-container flex flex-col space-y-4" onSubmit={handleSubmit}>
                     <input onChange={changeInputData} name="name" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>
@@ -59,7 +59,9 @@ function MainDashboard() {
                          )
                         }
                     </select>
-                    <input onChange={changeInputData} name="breed" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service"/>
+                    <select onChange={changeInputData} name="service" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service">
+                        {servicesName.map(serviceName => <option key={serviceName}>{serviceName}</option>)}    
+                    </select>
                     <input onChange={changeInputData} name="date" type="date" id="appointment-date" className="border rounded border-red-400 w-1/2 p-2"></input>
                     <select onChange={changeInputData} name="time" type="time" id="appointment-time" className="border rounded border-red-400 w-1/2 p-2">
                         {times.map(time => <option key={time}>{time}</option>)}    
