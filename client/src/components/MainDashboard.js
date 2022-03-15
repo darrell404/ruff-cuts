@@ -10,24 +10,30 @@ function MainDashboard() {
 
     const { showdashboard } = useContext(AppContext)
     const [ dashboard ] = showdashboard;
-    const { changeInputData, disableButton, inputFields } = useValidateData(dashboard)
+    const { changeInputData, addBooking, minimumDate, disableButton, inputFields } = useValidateData(dashboard)
     const { pets, addPets } = useFetchPets()
     const { services, servicesName } = useGetServices()
     const times = useSetTime(25, 1100, 1300)
+    var dateToday = new Date().toISOString().split('T')
 
-    const handleSubmit = (event) => {
+    const handleSubmitPet = (event) => {
         event.preventDefault()
         addPets(inputFields)
     }
 
+    const handleSubmitBooking = (event) => {
+        event.preventDefault()
+        addBooking()
+    }
+
     if (dashboard === "Pets") {
         return ( 
-            <div className="dashboard col-span-4 p-8"> {console.log(servicesName)}
+            <div className="dashboard col-span-4 p-8">
                 <h2 className="font-bold pb-4">Add your pets</h2>
-                <form className="form-container flex flex-col space-y-4" onSubmit={handleSubmit}>
-                    <input onChange={changeInputData} name="name" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>
-                    <input onChange={changeInputData} name="breed" className="border rounded border-red-400 w-1/2 p-2" placeholder="Breed"/>
-                    <input onChange={changeInputData} name="age" className="border rounded border-red-400 w-1/2 p-2" placeholder="Age"/>
+                <form className="form-container flex flex-col space-y-4" onSubmit={handleSubmitPet}>
+                    <input onChange={changeInputData} name="name" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>
+                    <input onChange={changeInputData} name="breed" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Breed"/>
+                    <input onChange={changeInputData} name="age" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Age"/>
                     <button className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" disabled={disableButton}>Save</button>
                 </form>
                 <div className="pt-10 font-bold">Your pets</div>
@@ -51,19 +57,19 @@ function MainDashboard() {
     return (
         <div className="dashboard col-span-4 p-8">
                 <h2 className="font-bold pb-4">Book an appointment</h2>
-                <form className="form-container flex flex-col space-y-4" >
-                    <select name="name" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name">
+                <form className="form-container flex flex-col space-y-4" onSubmit={handleSubmitBooking}>
+                    <select name="name" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name">
                         {pets.length === 0 ? <option>No dog registered</option> :
                         pets && pets.map(pet => 
                             <option key={pet} value={pet}>{pet}</option>
                          )
                         }
                     </select>
-                    <select onChange={changeInputData} name="service" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service">
+                    <select onChange={changeInputData} name="service" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service">
                         {servicesName.map(serviceName => <option key={serviceName}>{serviceName}</option>)}    
                     </select>
-                    <input onChange={changeInputData} name="date" type="date" id="appointment-date" className="border rounded border-red-400 w-1/2 p-2"></input>
-                    <select onChange={changeInputData} name="time" type="time" id="appointment-time" className="border rounded border-red-400 w-1/2 p-2">
+                    <input onChange={changeInputData} name="date" min={minimumDate} data-input="true" type="date" id="appointment-date" className="border rounded border-red-400 w-1/2 p-2"></input>
+                    <select onChange={changeInputData} name="time" data-input="true" type="time" id="appointment-time" className="border rounded border-red-400 w-1/2 p-2">
                         {times.map(time => <option key={time}>{time}</option>)}    
                     </select>
                     <button className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" disabled={disableButton}>Book Now</button>

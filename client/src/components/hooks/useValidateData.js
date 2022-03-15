@@ -5,10 +5,11 @@ function useValidateData(showpage) {
     const [inputFields, setInputFields] = useState({})
     const [disableButton, setDisableButton] = useState(true)
     const [alert, setAlert] = useState('')
+    const [minimumDate, setMinimumDate] = useState()
     const navigate = useNavigate()
 
 useEffect(() => {
-    const inputFieldObject = document.querySelectorAll("input")
+    const inputFieldObject = document.querySelectorAll('[data-input="true"]')
     var inputFieldDataHolder = {}
     inputFieldObject.forEach(e => {
         inputFieldDataHolder[e.name] = e.value
@@ -16,6 +17,22 @@ useEffect(() => {
     setInputFields(inputFieldDataHolder)
 }, [showpage])
 
+useEffect(() => {
+    var dateToday = new Date()
+    var year = dateToday.getFullYear()
+    var month = dateToday.getMonth() + 1
+    var day = dateToday.getDate()
+
+    if (month < 10) {
+        month = '0' + String(month)
+    }
+
+    if (day < 10) {
+        day = '0' + String(day)
+    }
+
+    setMinimumDate(`${year}-${month}-${day}`)
+})
 
 useEffect(() => {
     //  Check if passwords match on register page
@@ -66,7 +83,11 @@ useEffect(() => {
         }
     }
 
-    return { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields }
+    const addBooking = () => {
+        console.log(inputFields)
+    }
+
+    return { checkPasswordsMatch, changeInputData, addBooking, disableButton, alert, inputFields, minimumDate }
 }
 
 export default useValidateData
