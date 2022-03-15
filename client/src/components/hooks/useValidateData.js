@@ -32,7 +32,7 @@ useEffect(() => {
     }
 
     setMinimumDate(`${year}-${month}-${day}`)
-})
+}, [])
 
 useEffect(() => {
     //  Check if passwords match on register page
@@ -83,8 +83,18 @@ useEffect(() => {
         }
     }
 
-    const addBooking = () => {
-        console.log(inputFields)
+    const addBooking = async () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputFields)
+        }
+
+        const submitBooking = await fetch('/api/bookings/add', options)
+        const response = submitBooking.json()
+        console.log(response)
     }
 
     return { checkPasswordsMatch, changeInputData, addBooking, disableButton, alert, inputFields, minimumDate }
