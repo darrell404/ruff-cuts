@@ -10,6 +10,7 @@ function useValidateData(showpage) {
 
 useEffect(() => {
     const inputFieldObject = document.querySelectorAll('[data-input="true"]')
+    console.log(showpage)
     var inputFieldDataHolder = {}
     inputFieldObject.forEach(e => {
         inputFieldDataHolder[e.name] = e.value
@@ -93,7 +94,7 @@ useEffect(() => {
         }
 
         const submitBooking = await fetch('/api/bookings/add', options)
-        const response = submitBooking.json()
+        const response = await submitBooking.json()
         console.log(response)
     }
 

@@ -14,7 +14,9 @@ const login = async (credentials) => {
         console.log("Authenticated")
         window.location.href = '/dashboard'
     }
-    else console.log("Access denied")    
+    else {
+        console.log("Access denied") 
+    } 
 }
 
 export default login
