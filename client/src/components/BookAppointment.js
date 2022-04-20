@@ -31,6 +31,7 @@ function hideBookingForm() {
     document.getElementById("add-booking").classList.add("hidden")
     document.getElementById("view-booking").classList.remove("hidden")
 }
+
     return (
         <div className="dashboard col-span-4 p-8">
             <div className="col-span-4 p-8" id="view-booking">
@@ -39,6 +40,9 @@ function hideBookingForm() {
                     <ul>
                         <p className='pt-4'>You have no upcoming appointments</p>
                     </ul>
+                    {bookings && bookings.map(booking => 
+                    <div key={booking.booking_id}>{booking.booking_date}</div>
+                    )}
                 </div>
                 <button onClick={showBookingForm} className="py-2 mt-4 w-1/5 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border">Book Now</button>
             </div>

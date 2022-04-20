@@ -10,8 +10,8 @@ router.route('/').get((req,res) => {
 router.get('/all', isAuthorised, async (req,res) => {
     const { customer_id } = res.locals.jwt
     try {
-        const queryAllBookings = await db.query('SELECT bookings.booking_date, bookings.booking_time, pets.pet_name, pets.pet_breed FROM bookings INNER JOIN pets ON bookings.pet_id = pets.pet_id WHERE bookings.owner_id = ?', customer_id)
-        console.log(queryAllBookings)
+        const queryAllBookings = await db.query('SELECT bookings.booking_id, bookings.booking_date, bookings.booking_time, pets.pet_name, pets.pet_breed FROM bookings INNER JOIN pets ON bookings.pet_id = pets.pet_id WHERE bookings.owner_id = ?', customer_id)
+        // console.log(queryAllBookings)
         res.json(queryAllBookings)
     }
     catch(err) {

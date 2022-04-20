@@ -9,7 +9,6 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/userpets').get(isAuthorised, async (req,res) => {
-    console.log(req.headers)
     const { customer_id } = res.locals.jwt
     const pets = await db.query('SELECT pets.pet_name FROM pets WHERE owner_id=?', customer_id)
     res.json(pets)

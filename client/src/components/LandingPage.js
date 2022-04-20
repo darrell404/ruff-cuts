@@ -21,16 +21,16 @@ function LandingPage() {
     }
    
     return (
-        <div>
+        <div> {console.log(select)}
             <div className="grid md:grid-cols-4 xl:grid-cols-5 h-screen">
                 <div className='col-span-2 xl:col-span-3 h-full bg-dog-banner bg-cover md:block hidden' src={dogBannerImage} alt="Dog"></div>
                 <div className="col-span-2 flex flex-col">
                     <h1 className="mx-auto font-bold pt-32 text-7xl header">Ruff Cuts</h1>
                     <div className="button-container mx-auto mt-20">
-                        <button onClick={clickEvent} name="login" className={`py-2 px-4 list-none bg-red-200 font-bold rounded border ${select === 'Login' ? "bg-red-400" : "bg-red-200"}`}>
+                        <button onClick={clickEvent} name="login" className={`py-2 px-4 list-none font-bold rounded border ${select === 'Login' ? "bg-red-400" : "bg-red-200"}`}>
                             Login
                         </button>
-                        <button onClick={clickEvent} name="register" className={`py-2 px-4 list-none bg-red-200 font-bold rounded border ${select === 'Register' ? "bg-red-400" : "bg-red-200"}`}>
+                        <button onClick={clickEvent} name="register" className={`py-2 px-4 list-none font-bold rounded border ${select === 'Register' ? "bg-red-400" : "bg-red-200"}`}>
                             Register
                         </button>
                     </div>

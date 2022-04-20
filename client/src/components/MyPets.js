@@ -33,8 +33,8 @@ export default function MyPets() {
                         <input onChange={changeInputData} name="name" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>
                         <input onChange={changeInputData} name="breed" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Breed"/>
                         <input onChange={changeInputData} name="age" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Age"/>
-                        <button className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" disabled={disableButton}>Save</button>
-                        <button className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" onClick={hidePetsForm}>Cancel</button>
+                        <button type="submit" className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" disabled={disableButton}>Save</button>
+                        <button type="reset" className="py-2 w-1/4 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" onClick={hidePetsForm}>Cancel</button>
                     </form>
             </div>
             <div className="dashboard col-span-4 p-8" id="view-pets">
