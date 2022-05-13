@@ -21,7 +21,7 @@ function LandingPage() {
     }
    
     return (
-        <div> {console.log(select)}
+        <div>
             <div className="grid md:grid-cols-4 xl:grid-cols-5 h-screen">
                 <div className='col-span-2 xl:col-span-3 h-full bg-dog-banner bg-cover md:block hidden' src={dogBannerImage} alt="Dog"></div>
                 <div className="col-span-2 flex flex-col">

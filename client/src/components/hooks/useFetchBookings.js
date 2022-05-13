@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { AppContext } from "../context/Context"
 
 const useFetchBookings = () => {
 
-const [bookings, setBookings] = useState([])
+const { appointments } = useContext(AppContext)
+const [bookings, setBookings] = appointments
 
 useEffect(() => {
     const fetchBookingsFromAPI = async() => {

@@ -40,9 +40,25 @@ function hideBookingForm() {
                     <ul>
                         <p className='pt-4'>You have no upcoming appointments</p>
                     </ul>
-                    {bookings && bookings.map(booking => 
-                    <div key={booking.booking_id}>{booking.booking_date}</div>
-                    )}
+                    <table className="py-2 px-4 bookings-table">
+                        <thead>
+                            <tr>
+                                <td className='py-1 px-4 font-bold'>Pet Name</td>
+                                <td className='py-1 px-4 font-bold'>Breed</td>
+                                <td className='py-1 px-4 font-bold'>Appointment Date</td>
+                                <td className='py-1 px-4 font-bold'>Appointment Time</td>
+                                <td className='py-1 px-4 font-bold'>Status</td>
+                            </tr>
+                            {bookings && bookings.map(booking => 
+                                <tr key={booking.booking_id}>
+                                    <td className='py-1 px-4'>{booking.pet_name}</td>
+                                    <td className='py-1 px-4'>{booking.pet_breed}</td>
+                                    <td className='py-1 px-4'>{booking.booking_date}</td>
+                                    <td className='py-1 px-4'>{booking.booking_time}</td>
+                                </tr>
+                                )}
+                        </thead>
+                    </table>
                 </div>
                 <button onClick={showBookingForm} className="py-2 mt-4 w-1/5 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border">Book Now</button>
             </div>
@@ -53,7 +69,7 @@ function hideBookingForm() {
                         <option disabled hidden value="">Select pet</option>
                         {pets.length === 0 ? <option>No dog registered</option> :
                         pets && pets.map(pet => 
-                            <option key={pet} value={pet}>{pet}</option>
+                            <option key={pet.pet_name} value={pet.pet_name}>{pet.pet_name}</option>
                             )
                         }
                     </select>

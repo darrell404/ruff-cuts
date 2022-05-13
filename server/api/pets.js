@@ -10,7 +10,7 @@ router.route('/').get((req, res) => {
 
 router.route('/userpets').get(isAuthorised, async (req,res) => {
     const { customer_id } = res.locals.jwt
-    const pets = await db.query('SELECT pets.pet_name FROM pets WHERE owner_id=?', customer_id)
+    const pets = await db.query('SELECT pets.pet_id, pets.pet_name, pets.pet_breed FROM pets WHERE owner_id=?', customer_id)
     res.json(pets)
 })
 
@@ -26,6 +26,16 @@ router.post('/addpets', isAuthorised, async(req, res) => {
         res.json({"message": "Error in adding pet"})
     }
 
+})
+
+router.post('/fetchPet', isAuthorised, async(req,res) => {
+    const { pet_id } = req.body
+    try {
+        const fetchOnePet = await db.query
+    }
+    catch {
+
+    }
 })
 
 module.exports = router;

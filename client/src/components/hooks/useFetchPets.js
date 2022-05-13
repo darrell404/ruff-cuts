@@ -4,20 +4,14 @@ import useValidateData from './useValidateData'
 
 
 const useFetchPets = () => {
-    var fetchedPets = []
     const { userpets } = useContext(AppContext)
     const [pets, setPets] = userpets
 
     useEffect(() => {
         const fetchPets = async() => {
             const fetchFromAPI = await fetch('/api/pets/userpets')
-            const pets = await fetchFromAPI.json()
-            if (Object.keys(pets) !== 0) {
-                for (const pet in pets) {
-                    fetchedPets.push(pets[pet].pet_name)
-                }
-                setPets(fetchedPets)
-            }
+            const mypets = await fetchFromAPI.json()
+            setPets(mypets)
         }
         fetchPets()
     }, [])
@@ -40,7 +34,7 @@ const useFetchPets = () => {
         try {
             const sendPetData = await fetch('/api/pets/addpets', options)
             const response = sendPetData.json()
-            setPets([...pets, petdata.name])
+            // setPets([...pets, petdata])
             clearInputFields()
         }
         catch(e) {console.log(e)}
@@ -52,7 +46,11 @@ const useFetchPets = () => {
         inputField.forEach(input => input.value = '')
     }
 
-    return { pets, addPets }
+    const fetchSinglePet = (pet) => {
+
+    }
+
+    return { pets, addPets, fetchSinglePet }
 }
 
 export default useFetchPets

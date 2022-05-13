@@ -10,7 +10,6 @@ function useValidateData(showpage) {
 
 useEffect(() => {
     const inputFieldObject = document.querySelectorAll('[data-input="true"]')
-    console.log(showpage)
     var inputFieldDataHolder = {}
     inputFieldObject.forEach(e => {
         inputFieldDataHolder[e.name] = e.value

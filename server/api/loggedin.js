@@ -9,7 +9,7 @@ router.route('/').get((req,res) => {
         const verifyToken = jwt.verify(userToken, process.env.TOKEN_SECRET)
         res.send(verifyToken)
     }
-    res.send({"message": "Not logged in"})
+    else res.send({"message": "Not logged in"})
 })
 
 module.exports = router;
