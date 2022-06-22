@@ -1,7 +1,12 @@
-import React from 'react'
+import useFetchUserInfo from './hooks/useFetchUserInfo'
 
 export default function HomePage() {
-  return (
-    <div>HomePage</div>
-  )
+  const { userData } = useFetchUserInfo()
+
+    return (
+      <div className='h-full'>
+         <h1 className='text-3xl'>Welcome, {userData.first_name}!</h1>
+      </div>
+    )
+
 }

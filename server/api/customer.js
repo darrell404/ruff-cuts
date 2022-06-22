@@ -1,4 +1,5 @@
 const express = require('express')
+const isAuthorised = require('../auth/auth')
 const router = express.Router()
 const db = require('../db/db')
 
@@ -6,8 +7,9 @@ router.route('/').get((req, res) => {
     res.send("This is the customers endpoint!")
 })
 
-router.route('/:customerID').get(async (req,res) => {
-    const rows = await db.query('SELECT customer_id, first_name, last_name FROM customers WHERE customer_id=?', req.params.customerID)
+router.route('/info').get(isAuthorised, async (req,res) => {
+    const {customer_id} = res.locals.jwt
+    const rows = await db.query('SELECT customer_id, first_name, last_name FROM customers WHERE customer_id=?', customer_id)
     res.json(rows)
 })
 

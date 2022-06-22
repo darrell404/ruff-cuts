@@ -28,11 +28,11 @@ function App() {
               </PrivateRoute>} />
             <Route exact path="/dashboard/pets" element={
               <PrivateRoute>
-              <Dashboard component={MyPets}/>
+                <Dashboard component={MyPets}/>
               </PrivateRoute>} />
             <Route exact path="/dashboard/bookings" element={
               <PrivateRoute>
-              <Dashboard component={BookAppointment}/>
+                <Dashboard component={BookAppointment}/>
               </PrivateRoute>} />
           </Routes>
       </div>
