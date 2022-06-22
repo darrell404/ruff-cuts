@@ -1,12 +1,10 @@
 import Sidebar from './Sidebar'
-import MainDashboard from './MainDashboard'
 
-function Dashboard() {
-
+function Dashboard({component: Component}) {
     return (
         <div className="grid grid-cols-5 h-screen p-12">
             <Sidebar />
-            <MainDashboard />
+            <Component />
         </div>
     )
 }

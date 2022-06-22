@@ -5,6 +5,7 @@ import useGetServices from './hooks/useGetServices'
 import useFetchPets from './hooks/useFetchPets'
 import useSetTime from './hooks/useSetTime'
 import useFetchBookings from './hooks/useFetchBookings'
+import Sidebar from './Sidebar'
 
 export default function BookAppointment() {
 
@@ -33,6 +34,7 @@ function hideBookingForm() {
 }
 
     return (
+        <>
         <div className="dashboard col-span-4 p-8">
             <div className="col-span-4 p-8" id="view-booking">
                 <div className="pt-10 font-bold"> Your Appointments </div>
@@ -87,5 +89,6 @@ function hideBookingForm() {
                 </form>
             </div>
         </div>
+        </>
     )
 }

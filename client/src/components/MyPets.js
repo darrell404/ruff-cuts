@@ -2,6 +2,7 @@ import {useContext} from 'react'
 import { AppContext } from './context/Context'
 import useValidateData from './hooks/useValidateData'
 import useFetchPets from './hooks/useFetchPets'
+import Sidebar from './Sidebar'
 
 export default function MyPets() {
 
@@ -30,6 +31,7 @@ export default function MyPets() {
     }
 
     return (
+        <>
         <div className='dashboard col-span-4 p-8'>
             <div className="dashboard col-span-4 p-8 hidden" id="add-pets">
                     <h2 className="font-bold pb-4">Add your pets</h2>
@@ -59,5 +61,6 @@ export default function MyPets() {
                     <button className="py-2 mt-4 w-2/5 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" onClick={showPetsForm}>Add Pets</button>
                 </div>
         </div>
+        </>
     )
 }

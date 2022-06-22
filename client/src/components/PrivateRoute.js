@@ -2,16 +2,12 @@ import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from './context/Context'
 
-function PrivateRoute({component: Component}) {
+function PrivateRoute({children}) {
     const { loggedin } = useContext(AppContext)
     const [loggedIn] = loggedin
-    if (loggedIn)
-    return (
-            <Component />
-        )
-    return (
-            <Navigate to='/'/>
-    )
+   
+    return loggedIn ? children :  <Navigate to='/'/>
+
 }
 
 export default PrivateRoute

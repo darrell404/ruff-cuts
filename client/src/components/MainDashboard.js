@@ -10,14 +10,9 @@ function MainDashboard() {
     const { showdashboard } = useContext(AppContext)
     const [ dashboard ] = showdashboard;
 
-    if (dashboard === "Pets") {
-        return ( 
-           <MyPets />
-        )
-    }
-
     return (
-        <BookAppointment />
+        <>
+        </>
     )
 }
 
