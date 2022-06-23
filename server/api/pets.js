@@ -19,11 +19,11 @@ router.post('/addpets', isAuthorised, async(req, res) => {
     const { name, breed, age } = req.body
     try {
         const addPet = await db.query('INSERT INTO pets (pet_name, owner_id, pet_breed, pet_age) VALUES (?,?,?,?)', [name, customer_id, breed, age])
-        res.json({"message": "Data added successfully"})
+        res.json({"message": "Data added successfully", "status": "success"})
     }
     catch(e) {
         console.log(e)
-        res.json({"message": "Error in adding pet"})
+        res.json({"message": "Error in adding pet", "status": "error"})
     }
 
 })

@@ -5,6 +5,7 @@ const useFetchBookings = () => {
 
 const { appointments } = useContext(AppContext)
 const [bookings, setBookings] = appointments
+const [loading, setLoading] = useState(true)
 
 useEffect(() => {
     const fetchBookingsFromAPI = async() => {
@@ -16,6 +17,7 @@ useEffect(() => {
                 result[data].booking_date = date.toDateString()
             }
             setBookings(result)
+            setLoading(false)
         }
         catch(err) {
             console.log(err)
@@ -24,7 +26,7 @@ useEffect(() => {
     fetchBookingsFromAPI()
 }, []) 
    
-    return bookings
+    return { bookings, loading }
 }
 
 export default useFetchBookings

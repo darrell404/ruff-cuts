@@ -1,11 +1,6 @@
-import useHighlightSelected from "./hooks/useHighlightSelected"
-import { AppContext } from './context/Context' 
-import { useContext } from 'react'
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
-    const { showdashboard } = useContext(AppContext)
-    const { select, clickEvent } = useHighlightSelected(showdashboard)
     const navigate = useNavigate()
 
     return (

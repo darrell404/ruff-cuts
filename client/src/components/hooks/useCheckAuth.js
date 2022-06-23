@@ -16,6 +16,9 @@ const useCheckAuth = () => {
         if (user.hasOwnProperty("customer_id")) {
             setLoggedIn(true)
         }
+        else if (user.message) {
+            setLoggedIn(false)
+        }
         setPageLoad(false)
     }
     checkLoggedInStatus()

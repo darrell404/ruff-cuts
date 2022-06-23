@@ -6,6 +6,7 @@ import useCheckAuth from './hooks/useCheckAuth'
 import MyPets from './MyPets'
 import BookAppointment from './BookAppointment'
 import HomePage from './HomePage'
+import Loading from './Loading'
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
   if(pageLoad)
   return (
     <div className="App">
-      <div>Loading Data</div>
+      <Loading />
     </div>
   )
   else
@@ -24,15 +25,21 @@ function App() {
             <Route exact path="/" element={loggedIn ? <Navigate to="/dashboard"/> : <LandingPage />} />
             <Route exact path="/dashboard" element={
               <PrivateRoute> 
-                <Dashboard component={HomePage} />
+                <Dashboard>
+                  <HomePage />
+                </Dashboard>
               </PrivateRoute>} />
             <Route exact path="/dashboard/pets" element={
               <PrivateRoute>
-                <Dashboard component={MyPets}/>
+                <Dashboard>
+                    <MyPets/>
+                </Dashboard>
               </PrivateRoute>} />
             <Route exact path="/dashboard/bookings" element={
               <PrivateRoute>
-                <Dashboard component={BookAppointment}/>
+                <Dashboard>
+                  <BookAppointment/>
+                </Dashboard>
               </PrivateRoute>} />
           </Routes>
       </div>
