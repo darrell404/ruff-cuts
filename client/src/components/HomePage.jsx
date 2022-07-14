@@ -1,4 +1,4 @@
-import useFetchUserInfo from './hooks/useFetchUserInfo'
+import useFetchUserInfo from '../hooks/useFetchUserInfo'
 import Loading from './Loading'
 
 export default function HomePage() {

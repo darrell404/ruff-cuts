@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { AppContext } from './context/Context'
-import useValidateData from './hooks/useValidateData'
-import useGetServices from './hooks/useGetServices'
-import useFetchPets from './hooks/useFetchPets'
-import useSetTime from './hooks/useSetTime'
-import useFetchBookings from './hooks/useFetchBookings'
+import { AppContext } from '../context/Context'
+import useValidateData from '../hooks/useValidateData'
+import useGetServices from '../hooks/useGetServices'
+import useFetchPets from '../hooks/useFetchPets'
+import useSetTime from '../hooks/useSetTime'
+import useFetchBookings from '../hooks/useFetchBookings'
 import Loading from './Loading'
 
 export default function BookAppointment() {

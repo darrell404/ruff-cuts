@@ -1,9 +1,9 @@
 import dogBannerImage from '../images/dog-banner.jpeg'
-import useHighlightSelected from './hooks/useHighlightSelected'
-import useValidateData from './hooks/useValidateData'
-import { AppContext } from './context/Context' 
+import useHighlightSelected from '../hooks/useHighlightSelected'
+import useValidateData from '../hooks/useValidateData'
+import { AppContext } from '../context/Context' 
 import { useContext } from 'react'
-import login from './utils/login'
+import login from '../utils/login'
 
 function LandingPage() {
     const { showpage } = useContext(AppContext)

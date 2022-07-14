@@ -1,7 +1,7 @@
 import {useContext, useState} from 'react'
-import { AppContext } from './context/Context'
-import useValidateData from './hooks/useValidateData'
-import useFetchPets from './hooks/useFetchPets'
+import { AppContext } from '../context/Context'
+import useValidateData from '../hooks/useValidateData'
+import useFetchPets from '../hooks/useFetchPets'
 import Loading from './Loading'
 import { useNavigate } from 'react-router'
 
