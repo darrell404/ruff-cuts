@@ -18,7 +18,6 @@ export default function MyPets() {
     const handleSubmitPet = async (event) => {
         event.preventDefault()
         const addpetStatus = await addPets(inputFields)
-        console.log(addpetStatus)
         setShowPetsForm(false)
     }
 
@@ -31,7 +30,7 @@ export default function MyPets() {
         <div className='dashboard col-span-4 p-8'>
             { petsLoading ? <Loading/> : 
             !showPetsForm ? 
-                <div className="dashboard col-span-4 mx-auto p-8" id="view-pets"> {console.log(pets)}
+                <div className="dashboard col-span-4 mx-auto p-8" id="view-pets">
                     <div className="pt-10 font-bold">Your pets</div>
                     <div>
                         <ul>

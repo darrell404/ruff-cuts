@@ -6,13 +6,14 @@ const useFetchPets = () => {
     const [pets, setPets] = userpets
     const [petsLoading, setPetsLoading] = useState(true)
 
+    const fetchPets = async() => {
+        const fetchFromAPI = await fetch('/api/pets/userpets')
+        const mypets = await fetchFromAPI.json()
+        setPets(mypets)
+        setPetsLoading(false)
+    }
+
     useEffect(() => {
-        const fetchPets = async() => {
-            const fetchFromAPI = await fetch('/api/pets/userpets')
-            const mypets = await fetchFromAPI.json()
-            setPets(mypets)
-            setPetsLoading(false)
-        }
         fetchPets()
     }, [])
 
@@ -34,11 +35,12 @@ const useFetchPets = () => {
         try {
             const sendPetData = await fetch('/api/pets/addpets', options)
             const response = await sendPetData.json()
-            if (response.status == 'error') {
+            if (response.status !== 'error') {
+                clearInputFields()
+                fetchPets()
                 return
             }
-            clearInputFields()
-            return response.status
+            return
         }
         catch(e) {console.log(e)}
         
