@@ -1,14 +1,23 @@
 import dogBannerImage from '../images/dog-banner.jpeg'
-import useHighlightSelected from '../hooks/useHighlightSelected'
 import useValidateData from '../hooks/useValidateData'
 import { AppContext } from '../context/Context' 
 import { useContext } from 'react'
 import login from '../utils/login'
+import { useEffect } from 'react'
 
 function LoginPage() {
-    const { showpage } = useContext(AppContext)
-    const { select, clickEvent } = useHighlightSelected(showpage)
-    const { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields } = useValidateData(showpage)
+    const { loginPage } = useContext(AppContext)
+    const [loginPageDisplay, setLoginPageDisplay] = loginPage
+    const { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields } = useValidateData(loginPageDisplay)
+
+    useEffect(() => {
+        const form = document.querySelectorAll('input')
+        form.forEach(e => e.value = '')
+    }, [loginPageDisplay])
+
+    const clickEvent = (event) => {
+        setLoginPageDisplay(event.target.textContent)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -27,14 +36,14 @@ function LoginPage() {
                 <div className="col-span-2 flex flex-col">
                     <h1 className="mx-auto font-bold pt-32 text-7xl header">Ruff Cuts</h1>
                     <div className="button-container mx-auto mt-20">
-                        <button onClick={clickEvent} name="login" className={`py-2 px-4 list-none font-bold rounded border ${select === 'Login' ? "bg-red-400" : "bg-red-200"}`}>
+                        <button onClick={clickEvent} name="login" className={`py-2 px-4 list-none font-bold rounded border ${loginPageDisplay === 'Login' ? "bg-red-400" : "bg-red-200"}`}>
                             Login
                         </button>
-                        <button onClick={clickEvent} name="register" className={`py-2 px-4 list-none font-bold rounded border ${select === 'Register' ? "bg-red-400" : "bg-red-200"}`}>
+                        <button onClick={clickEvent} name="register" className={`py-2 px-4 list-none font-bold rounded border ${loginPageDisplay === 'Register' ? "bg-red-400" : "bg-red-200"}`}>
                             Register
                         </button>
                     </div>
-                    {select === "Login" ? 
+                    {loginPageDisplay === "Login" ? 
                     <form className='flex flex-col mx-auto mt-8 w-1/2' onSubmit={handleLogin}>
                         <input className='border rounded-t border-slate-400 p-2' onChange={changeInputData} type="text" name="email" placeholder='Username' autoComplete="email"></input>
                         <input className='border rounded-b border-slate-400 p-2' onChange={changeInputData} type="password" name="password" placeholder='Password' autoComplete='current-password'></input>

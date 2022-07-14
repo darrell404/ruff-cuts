@@ -94,7 +94,6 @@ useEffect(() => {
 
         const submitBooking = await fetch('/api/bookings/add', options)
         const response = await submitBooking.json()
-        console.log(response)
     }
 
     return { checkPasswordsMatch, changeInputData, addBooking, disableButton, alert, inputFields, minimumDate }
