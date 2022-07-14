@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom'
 import { useContext } from 'react'
-import { AppContext } from './context/Context'
+import { AppContext } from '../context/Context'
 
 function PrivateRoute({children}) {
     const { loggedin } = useContext(AppContext)

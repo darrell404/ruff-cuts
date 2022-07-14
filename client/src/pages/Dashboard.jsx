@@ -1,5 +1,5 @@
-import MainDashboard from './MainDashboard'
-import Sidebar from './Sidebar'
+import MainDashboard from '../components/MainDashboard'
+import Sidebar from '../components/Sidebar'
 
 function Dashboard({children}) {
     return (

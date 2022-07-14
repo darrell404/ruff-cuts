@@ -1,11 +1,11 @@
 import dogBannerImage from '../images/dog-banner.jpeg'
-import useHighlightSelected from './hooks/useHighlightSelected'
-import useValidateData from './hooks/useValidateData'
-import { AppContext } from './context/Context' 
+import useHighlightSelected from '../hooks/useHighlightSelected'
+import useValidateData from '../hooks/useValidateData'
+import { AppContext } from '../context/Context' 
 import { useContext } from 'react'
-import login from './utils/login'
+import login from '../utils/login'
 
-function LandingPage() {
+function LoginPage() {
     const { showpage } = useContext(AppContext)
     const { select, clickEvent } = useHighlightSelected(showpage)
     const { checkPasswordsMatch, changeInputData, disableButton, alert, inputFields } = useValidateData(showpage)
@@ -60,4 +60,4 @@ function LandingPage() {
     )
 }
 
-export default LandingPage
+export default LoginPage
