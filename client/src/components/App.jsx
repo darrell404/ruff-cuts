@@ -9,6 +9,7 @@ import HomePage from './HomePage'
 import Loading from './Loading'
 import CreateBooking from '../pages/CreateBooking'
 import AddPets from '../pages/AddPets'
+import SinglePetInfo from '../pages/SinglePetInfo'
 
 function App() {
 
@@ -53,6 +54,12 @@ function App() {
             <PrivateRoute>
               <Dashboard>
                 <AddPets />
+              </Dashboard>
+            </PrivateRoute>} />
+            <Route exact path="/dashboard/pets/:pet_id" element={
+            <PrivateRoute>
+              <Dashboard>
+                <SinglePetInfo />
               </Dashboard>
             </PrivateRoute>} />
           </Routes>

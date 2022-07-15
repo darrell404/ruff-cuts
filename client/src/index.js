@@ -4,12 +4,15 @@ import App from './components/App';
 import ContextProvider from './context/Context';
 import './index.css'
 import {BrowserRouter} from 'react-router-dom'
+import PetDataContext from './context/PetDataContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ContextProvider>
-        <App />
+        <PetDataContext>
+          <App />
+        </PetDataContext>
       </ContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -12,17 +12,9 @@ const useFetchPets = () => {
         setPets(mypets)
         setPetsLoading(false)
     }
-
     useEffect(() => {
         fetchPets()
     }, [])
-
-    const clearInputFields = () => {
-        const selectInputs = document.querySelectorAll("input")
-        selectInputs.forEach(element => {
-            element.value = ''
-        })
-    }
 
     const addPets = async (petdata) => {
         const options = {
@@ -36,7 +28,6 @@ const useFetchPets = () => {
             const sendPetData = await fetch('/api/pets/addpets', options)
             const response = await sendPetData.json()
             if (response.status !== 'error') {
-                clearInputFields()
                 fetchPets()
                 return
             }
@@ -46,11 +37,7 @@ const useFetchPets = () => {
         
     }
 
-    const fetchSinglePet = (pet) => {
-
-    }
-
-    return { pets, addPets, fetchSinglePet, petsLoading }
+    return { pets, addPets, petsLoading }
 }
 
 export default useFetchPets

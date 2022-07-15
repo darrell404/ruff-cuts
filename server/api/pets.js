@@ -3,6 +3,7 @@ const app = express()
 const router = express.Router()
 const db = require('../db/db')
 const isAuthorised = require('../auth/auth')
+const { response } = require('express')
 
 router.route('/').get((req, res) => {
     res.send("This is the pets endpoint!")
@@ -28,13 +29,20 @@ router.post('/addpets', isAuthorised, async(req, res) => {
 
 })
 
-router.post('/fetchPet', isAuthorised, async(req,res) => {
-    const { pet_id } = req.body
+router.get('/fetchPet/:id', isAuthorised, async(req,res) => {
+    const { customer_id } = res.locals.jwt
+    const pet_id = parseInt(req.params.id)
     try {
-        const fetchOnePet = await db.query
+        const fetchOnePet = await db.query('SELECT pet_id, pet_name, pet_breed, pet_age FROM pets WHERE owner_id=? AND pet_id=?', [customer_id, pet_id])
+        if (fetchOnePet.length == 0) {
+            res.json({"message": "Pet not found"})
+        }
+        else {
+            res.json(fetchOnePet)
+        }
     }
-    catch {
-
+    catch(e) {
+        console.log(e)
     }
 })
 
