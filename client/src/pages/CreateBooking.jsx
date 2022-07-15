@@ -1,8 +1,10 @@
+import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import useValidateData from '../hooks/useValidateData'
 import useGetServices from '../hooks/useGetServices'
 import useFetchPets from '../hooks/useFetchPets'
 import useSetTime from '../hooks/useSetTime'
+import { useEffect } from 'react'
 
 export default function CreateBooking() {
     const navigate = useNavigate()
@@ -10,10 +12,49 @@ export default function CreateBooking() {
     const { pets } = useFetchPets()
     const { servicesName } = useGetServices()
     const times = useSetTime(25, 1100, 1300)
+    const [availableTime, setAvailableTime] = useState({})
+    const [bookingInput, setBookingInput] = useState('')
+    const [dateInput, setDateInput] = useState('')
+    const previousInputValues = useRef({bookingInput, dateInput})
+
+    const checkAvailableSlots = async () => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dateInput)
+        }
+        console.log(options)
+
+        const checkAvailability = await fetch('/api/bookings/availability', options)
+        const response = await checkAvailability.json()
+    }
+
+    useEffect(() => {
+        previousInputValues.current.bookingInput = bookingInput
+        previousInputValues.current.dateInput = dateInput
+        if (previousInputValues.current.bookingInput == '' || previousInputValues.current.dateInput == '') {
+            return
+        }
+        else {
+            checkAvailableSlots()
+        }
+    }, [bookingInput, dateInput])
 
     const handleSubmitBooking = (event) => {
         event.preventDefault()
         addBooking()
+    }
+
+    const changedInput = (e) => {
+        changeInputData(e)
+        if (e.target.name === 'service') {
+            setBookingInput(e.target.value)
+        }
+        if (e.target.name === 'date') {
+            setDateInput(e.target.value)
+        }
     }
 
     return (
@@ -28,11 +69,11 @@ export default function CreateBooking() {
                     )
                 }
             </select>
-            <select onChange={changeInputData} name="service" defaultValue="" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service">
+            <select onChange={(e) => changedInput(e)} name="service" defaultValue="" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Service">
             <option disabled hidden value="">Select service</option>
                 {servicesName.map(serviceName => <option key={serviceName}>{serviceName}</option>)}    
             </select>
-            <input onChange={changeInputData} name="date" min={minimumDate} data-input="true" type="date" id="appointment-date" className="border rounded border-red-400 w-1/2 p-2"></input>
+            <input onChange={(e) => changedInput(e)} name="date" min={minimumDate} data-input="true" type="date" id="appointment-date" className="border rounded border-red-400 w-1/2 p-2"></input>
             <select onChange={changeInputData} name="time" defaultValue="" data-input="true" type="time" id="appointment-time" className="border rounded border-red-400 w-1/2 p-2">
             <option disabled hidden value="">Select time</option>
                 {times.map(time => <option key={time}>{time}</option>)}    

@@ -7,11 +7,23 @@ router.route('/').get((req,res) => {
     res.send("This is the bookings endpoint!")
 })
 
+// router.use('*', isAuthorised)
+
 router.get('/all', isAuthorised, async (req,res) => {
     const { customer_id } = res.locals.jwt
     try {
         const queryAllBookings = await db.query('SELECT bookings.booking_id, bookings.booking_date, bookings.booking_time, pets.pet_name, pets.pet_breed FROM bookings INNER JOIN pets ON bookings.pet_id = pets.pet_id WHERE bookings.owner_id = ? order by bookings.booking_date, bookings.booking_time', customer_id)
         res.json(queryAllBookings)
+    }
+    catch(err) {
+        console.log(err)
+    }
+})
+
+router.post('/availability', isAuthorised, async (req, res) => {
+    try {
+        const queryAvailableBookings = await db.query('SELECT booking_time FROM bookings WHERE booking_date=?', req.body.date)
+        res.json(queryAvailableBookings)
     }
     catch(err) {
         console.log(err)
