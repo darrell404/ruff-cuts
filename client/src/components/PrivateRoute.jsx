@@ -6,7 +6,7 @@ function PrivateRoute({children}) {
     const { loggedin } = useContext(AppContext)
     const [loggedIn] = loggedin
    
-    return loggedIn ? children :  <Navigate to='/'/>
+    return loggedIn ? children : <Navigate to='/'/>
 
 }
 

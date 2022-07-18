@@ -4,7 +4,8 @@ import Loading from './Loading'
 import { useEffect, useState } from 'react'
 
 export default function HomePage() {
-  const { userData, userDataLoading } = useFetchUserInfo()
+  const { userData } = useFetchUserInfo()
+  const [loading, setLoading]= useState(true)
   const { bookings } = useFetchBookings()
   const [upcomingBooking, setUpcomingBooking] = useState({})
   const now = new Date().toLocaleString()
@@ -15,15 +16,17 @@ export default function HomePage() {
         let bookingTime = new Date(`${booking.booking_date} ${booking.booking_time}`).toLocaleString()
         if (bookingTime > now) {
           setUpcomingBooking(booking)
+          setLoading(false)
           break
         }
       }
+      setLoading(false)
     }
   }, [bookings])
 
 return (
   <div className="dashboard col-span-4 p-8">
-    {userDataLoading ? <Loading /> : 
+    {loading ? <Loading /> : 
     <>
       <h1 className='text-3xl text-center'>Welcome, {userData.first_name}!</h1>
       <p>

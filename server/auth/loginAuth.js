@@ -3,8 +3,6 @@ const db = require('../db/db')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
-const cookieExpiry = 10 * 60 * 1000 // 10 minutes
-
 const loginAuth = async (req, res, next) => {
     const {email, password} = req.body;
     var checkAccount
@@ -22,12 +20,26 @@ const loginAuth = async (req, res, next) => {
         const verifyJWT = await bcrypt.compare(password, hashedPassword)
         if (verifyJWT) {
             res.locals.message = "Authenticated"
-            const token = jwt.sign(
+            const accessToken = jwt.sign(
                 {
                     customer_id, email
-                }, process.env.TOKEN_SECRET
+                }, process.env.TOKEN_SECRET,
+                {
+                    expiresIn: '15m'
+                }
             )
-            res.cookie("token", token, { httpOnly: true, maxAge: cookieExpiry })    
+
+            const refreshToken = jwt.sign(
+                {
+                    customer_id, email
+                }, process.env.REFRESH_TOKEN_SECRET,
+                {
+                    expiresIn: '30d'
+                }
+            )
+
+            res.cookie("token", accessToken, { httpOnly: true })
+            res.cookie("refreshToken", refreshToken, { httpOnly: true })  
             } 
         else res.locals.message = "Username or password incorrect"
     }
