@@ -15,7 +15,7 @@ export default function AddPets() {
     }
 
     return (
-    <div className="dashboard col-span-4 p-8" id="add-pets">
+    <div className="dashboard col-span-4 p-8 border border-slate-200 bg-white" id="add-pets">
         <h2 className="font-bold pb-4">Add your pets</h2>
         <form className="form-container flex flex-col space-y-4">
             <input onChange={changeInputData} name="name" data-input="true" className="border rounded border-red-400 w-1/2 p-2" placeholder="Pet name"/>

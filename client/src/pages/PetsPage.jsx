@@ -9,9 +9,9 @@ export default function PetsPage() {
 
     return (
         <>
-        <div className='dashboard col-span-4 p-8'>
             { petsLoading ? <Loading/> : 
-                <div className="dashboard col-span-4 mx-auto p-8" id="view-pets">
+            <div className='dashboard col-span-4 border border-slate-200'>
+                <div className="dashboard col-span-4 mx-auto p-8 bg-white" id="view-pets">
                     <div className="pt-10 font-bold">Your pets</div>
                     <div>
                         <ul>
@@ -28,8 +28,8 @@ export default function PetsPage() {
                     </div>
                     <button className="py-2 mt-4 w-2/5 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border" onClick={() => (navigate('/dashboard/pets/add'))}>Add Pets</button>
                 </div> 
+            </div>
             }            
-        </div>
         </>
     )
 }

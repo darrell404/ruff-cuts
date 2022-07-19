@@ -1,10 +1,12 @@
-
+import Header from '../components/Header'
 
 function MainDashboard({children}) {
-
     return (
-        <div className="col-span-4 border-2 border-red-400">
-            {children}
+        <div className='col-span-4 flex flex-col h-screen'>
+            <Header />
+            <div className="col-span-4 border-l-2 p-8 bg-zinc-100 h-full">
+                {children}
+            </div>
         </div>
     )
 }

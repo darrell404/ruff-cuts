@@ -9,10 +9,9 @@ const { loading, bookings } = useFetchBookings()
 const navigate = useNavigate()
     return (
         <>
-        <div className="dashboard col-span-4 p-8">
             { loading ? <Loading /> :
-            <div>
-            <div className="col-span-4 p-8" id="view-booking">
+            <div className="dashboard col-span-4 border border-slate-200">
+            <div className="col-span-4 bg-white p-8" id="view-booking">
                 <div className="pt-10 font-bold"> Your Appointments </div>
                 <div>
                     { bookings.length === 0 ?
@@ -43,7 +42,6 @@ const navigate = useNavigate()
                 <button onClick={() => navigate('/dashboard/bookings/add')} className="py-2 mt-4 w-1/5 list-none bg-red-400 disabled:bg-red-200 font-bold rounded border">Book Now</button>
             </div> 
             </div> }
-        </div>
         </>
     )
 }

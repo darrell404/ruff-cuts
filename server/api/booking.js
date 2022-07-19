@@ -22,7 +22,7 @@ router.get('/all', isAuthorised, async (req,res) => {
 
 router.post('/availability', isAuthorised, async (req, res) => {
     try {
-        const queryAvailableBookings = await db.query('SELECT booking_time FROM bookings WHERE booking_date=?', req.body.date)
+        const queryAvailableBookings = await db.query(`SELECT TIME_FORMAT(booking_time, '%H:%i') as booking_time FROM bookings WHERE booking_date=?`, req.body.date)
         res.json(queryAvailableBookings)
     }
     catch(err) {

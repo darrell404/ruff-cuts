@@ -1,10 +1,10 @@
 import useFetchUserInfo from '../hooks/useFetchUserInfo'
 import useFetchBookings from '../hooks/useFetchBookings'
-import Loading from './Loading'
+import Loading from '../components/Loading'
 import { useEffect, useState } from 'react'
 
 export default function HomePage() {
-  const { userData } = useFetchUserInfo()
+  const { user, userDataLoading } = useFetchUserInfo()
   const [loading, setLoading]= useState(true)
   const { bookings } = useFetchBookings()
   const [upcomingBooking, setUpcomingBooking] = useState({})
@@ -17,7 +17,7 @@ export default function HomePage() {
         if (bookingTime > now) {
           setUpcomingBooking(booking)
           setLoading(false)
-          break
+          return
         }
       }
       setLoading(false)
@@ -25,22 +25,24 @@ export default function HomePage() {
   }, [bookings])
 
 return (
-  <div className="dashboard col-span-4 p-8">
-    {loading ? <Loading /> : 
     <>
-      <h1 className='text-3xl text-center'>Welcome, {userData.first_name}!</h1>
-      <p>
-        Book appointments with us now
-      </p>
-      <h2>Your upcoming booking</h2>
-      <div>
-        {Object.keys(upcomingBooking).length === 0 ?
-        <p>You have no upcoming bookings</p> :
-        <p>{upcomingBooking.booking_date} {upcomingBooking.booking_time}</p>
-        }
+    {(loading || userDataLoading) ? <Loading /> : 
+    <div className="dashboard col-span-4 border border-slate-200">
+      <div className="bg-white mx-auto p-8">
+        <h1 className='text-3xl text-center'>Welcome, {user.first_name}!</h1>
+        <p>
+          Book appointments with us now
+        </p>
+        <h2>Your upcoming booking</h2>
+        <div> 
+          {Object.keys(upcomingBooking).length === 0 ?
+          <p>You have no upcoming bookings</p> :
+          <p>{upcomingBooking.booking_date} {upcomingBooking.booking_time}</p>
+          }
+        </div>
       </div>
-    </>
+      </div>
     }
-    </div>
+    </>
   )
 }

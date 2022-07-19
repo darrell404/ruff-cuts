@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar'
 
 function Dashboard({children}) {
     return (
-        <div className="grid gap-4 grid-cols-5 h-screen p-12">
+        <div className="grid grid-cols-5">
             <Sidebar />
             <MainDashboard>
                 {children}
