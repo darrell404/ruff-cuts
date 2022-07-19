@@ -1,10 +1,15 @@
+import { useContext } from 'react'
 import MainDashboard from '../components/MainDashboard'
 import Sidebar from '../components/Sidebar'
+import { AppContext } from '../context/Context'
 
 function Dashboard({children}) {
+    const {sidebar} = useContext(AppContext)
+    const [showSideBar, setShowSideBar] = sidebar
+
     return (
-        <div className="grid grid-cols-5">
-            <Sidebar />
+        <div className="flex">
+            {showSideBar && <Sidebar />}
             <MainDashboard>
                 {children}
             </MainDashboard>

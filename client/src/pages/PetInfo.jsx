@@ -2,7 +2,7 @@ import { useParams } from 'react-router'
 import Loading from '../components/Loading'
 import useFetchSinglePet from '../hooks/useFetchSinglePet'
 
-export default function SinglePetInfo() {
+export default function PetInfo() {
     const { pet_id } = useParams()
     const { selectedPet, loadingPage } = useFetchSinglePet(parseInt(pet_id))
 

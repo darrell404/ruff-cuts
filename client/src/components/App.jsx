@@ -3,13 +3,13 @@ import Dashboard from '../pages/Dashboard'
 import PrivateRoute from './PrivateRoute'
 import {Routes, Route, Navigate} from 'react-router-dom'
 import useCheckAuth from '../hooks/useCheckAuth'
-import MyPets from '../pages/PetsPage'
-import BookAppointment from '../pages/BookingPage'
+import MyPets from '../pages/Pets'
+import BookAppointment from '../pages/Bookings'
 import HomePage from '../pages/HomePage'
 import Loading from './Loading'
 import CreateBooking from '../pages/CreateBooking'
 import AddPets from '../pages/AddPets'
-import SinglePetInfo from '../pages/SinglePetInfo'
+import SinglePetInfo from '../pages/PetInfo'
 
 function App() {
 

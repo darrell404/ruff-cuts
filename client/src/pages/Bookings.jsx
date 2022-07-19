@@ -3,7 +3,7 @@ import useFetchBookings from '../hooks/useFetchBookings'
 import Loading from '../components/Loading'
 import { useNavigate } from 'react-router'
 
-export default function BookingPage() {
+export default function Bookings() {
 
 const { loading, bookings } = useFetchBookings()
 const navigate = useNavigate()
